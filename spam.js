@@ -37,7 +37,7 @@ client.on('message', msg => {
     const containsDiscordUrl = msg.content.toString().match(/discord\.gg\/\w*\d*/);
     const containsDiscordAltUrl = msg.content.toString().match(/discord\.com\/invite\/\w*\d*/);
     const containsTwitchUrl = msg.content.toString().match(/twitch\.tv\/\w*\d*/);
-    const containsPinkDiscord = msg.content.toString().match(/discord\.gg\/pink/);
+    const containsPinkDiscord = msg.content.toString().match(/discord\.gg\/pink$/);
 
     if (msg.member.user.tag != 'Shinsin-Bot#1849') {
     if (whitelist.indexOf(msg.member.user.tag)==-1 && msg.member.bannable) {
@@ -47,10 +47,10 @@ client.on('message', msg => {
         messageList.push(msg.content)
         getAllIndices(workingList,msg.member.user.tag)
     
-        if (getAllIndices(workingList,msg.member.user.tag).length>=5){
-            client.channels.cache.get('331475769215680513').send(msg.member.user.tag + " has been banned for spam")
+        if (getAllIndices(workingList,msg.member.user.tag).length>=8){
+            client.channels.cache.get('797233265572053022').send(msg.member.user.tag + " has been banned for spam")
             messageList.forEach(message => {
-                client.channels.cache.get('331475769215680513').send(message)
+                client.channels.cache.get('797233265572053022').send(message)
             })
             msg.member.ban({days: 7, reason: 'Spam'})
         }
@@ -59,7 +59,7 @@ client.on('message', msg => {
                 msg.reply("Check the pinned messages in the general channel. Lee los mensajes 'pinned' en el canal general");
                 }
             else {
-                client.channels.cache.get('331475769215680513').send(msg.member.user.tag + " has been banned for self-promotion")
+                client.channels.cache.get('797233265572053022').send(msg.member.user.tag + " has been banned for self-promotion")
                 msg.member.ban({days: 7, reason: 'Self-Promotion'})
                 }
             }
