@@ -10,6 +10,9 @@ setInterval(clearWorkingList, 60000)
 function clearWorkingList() {
     workingList = []
     messageList = []
+    client.channels.cache.get('797233265572053022').send('!whitelist');
+    client.channels.cache.get('797233265572053022').send('!refresh');
+    client.channels.cache.get('797233265572053022').send('!whitelist');
 }
 
 function getAllIndices(arr, val) {
@@ -27,7 +30,6 @@ client.on('ready', () => {
     guild.members.fetch().then(fetchedMembers => {
         fetchedMembers.forEach(member => {
             whitelist.push(member.user.tag);
-            
         })
     })
   })
@@ -64,23 +66,22 @@ client.on('message', msg => {
                 }
             }
         }
-        if (msg.content == "!refresh" && msg.member.user.tag == "Shinsina#5610") {
-            client.guilds.cache.forEach(guild => {
-            whitelist = [];
-            console.log(`${guild.name} | ${guild.id}`);
-            guild.members.fetch().then(fetchedMembers => {
-                fetchedMembers.forEach(member => {
-                    whitelist.push(member.user.tag);
-                })
-            })
-        })
-        }
-        if(msg.content =="!whitelist" && msg.member.user.tag == "Shinsina#5610") {
-            console.log(whitelist)
-        }
         if(msg.content =="!shinsin-bot") {
             msg.channel.send("Shinsin-Bot is a Discord bot developed by Shinsina, used as a moderation tool.")
         }
+    } else {
+        if (msg.content == "!refresh") {
+          client.guilds.cache.forEach(guild => {
+          whitelist = [];
+          guild.members.fetch().then(fetchedMembers => {
+              fetchedMembers.forEach(member => {
+                  whitelist.push(member.user.tag);
+              })
+          })
+        })
+      } else if (msg.content =="!whitelist") {
+        console.log(whitelist.length)
+    }
     }
 
 });
