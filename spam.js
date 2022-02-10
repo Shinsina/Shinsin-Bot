@@ -5,7 +5,7 @@ const client = new Discord.Client({ fetchedMembers: true });
 let workingList = [];
 let whitelist = [];
 let messageList = [];
-setInterval(clearWorkingList, 60000);
+setInterval(clearWorkingList, 180000);
 
 function clearWorkingList() {
   workingList = [];
@@ -16,7 +16,6 @@ function clearWorkingList() {
       fetchedMembers.forEach((member) => {
         whitelist.push(member.user.tag);
       });
-      console.log(whitelist.length);
     });
   });
 }
